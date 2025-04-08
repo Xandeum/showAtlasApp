@@ -23,6 +23,7 @@ export const HomeView: FC = ({ }) => {
 
         // Check if the response contains valid data
         if (result.status === "success") {
+          result.data.sort((a, b) => Number(a[0]) - Number(b[0]));
           setData(result.data); // Store the data array
         } else {
           setError("Failed to fetch data: Invalid response format.");
