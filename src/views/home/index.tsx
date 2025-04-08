@@ -51,7 +51,7 @@ export const HomeView: FC = ({ }) => {
 
   return (
     <div className="container flex mx-auto flex-col items-center w-full max-w-4xl p-4 mb-10">
-      <h2 className="text-3xl font-medium text-white md:leading-tight  my-5">Show Atlas App</h2>
+      <h2 className="text-3xl font-medium text-white md:leading-tight  my-5">Show Atlas App - DevNet</h2>
       <div className='flex flex-col gap-8 bg-tiles border-xnd w-full text-white p-5  mt-8 relative md:mb-0 mb-28 text-base'>
         <table className='table table-compact w-full'>
           <thead>
