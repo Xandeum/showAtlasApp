@@ -1,2 +1,4 @@
 
-# xandeum test app
+# xandeum ShowAtlas
+
+This is the devnet version
