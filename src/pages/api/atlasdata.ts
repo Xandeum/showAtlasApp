@@ -2,7 +2,7 @@
 export default async function handler(req, res) {
     try {
         // Fetch data from the external API
-        const response = await fetch("http://95.217.229.171:3000/api/data");
+        const response = await fetch("http://65.108.233.175:3000/api/data");
 
         // Check if the response is successful
         if (!response.ok) {

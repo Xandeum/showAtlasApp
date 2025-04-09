@@ -83,7 +83,7 @@ export const HomeView: FC = ({ }) => {
   return (
     <div className="container flex mx-auto flex-col items-center w-full max-w-4xl p-4 mb-10">
       <h2 className="text-3xl font-medium text-white md:leading-tight my-5">
-        Show Atlas App - DevNet
+        Show Atlas App - TryNet
       </h2>
 
       {/* Right side with search bar */}
