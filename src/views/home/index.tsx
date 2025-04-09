@@ -29,6 +29,8 @@ export const HomeView: FC = ({ }) => {
 
         if (result.status === "success") {
           result.data.sort((a, b) => Number(a[0]) - Number(b[0]));
+          //reverse the order of the data
+          result.data.reverse();
           setData(result.data); // Store the data array
           setFilteredData(result.data); // Initialize filtered data with the full data array
         } else {
@@ -83,7 +85,7 @@ export const HomeView: FC = ({ }) => {
   return (
     <div className="container flex mx-auto flex-col items-center w-full max-w-4xl p-4 mb-10">
       <h2 className="text-3xl font-medium text-white md:leading-tight my-5">
-        Show Atlas App - DevNet
+        Show Atlas App - TryNet
       </h2>
 
       {/* Right side with search bar */}
