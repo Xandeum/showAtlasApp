@@ -63,7 +63,7 @@ export const HomeView: FC = ({ }) => {
           <tbody>
             {data.map(([id, value], index) => (
               <tr key={index}>
-                <td className='text-left'>{id}</td>
+                <td className='text-center'>{id}</td>
                 <td className='text-center'>{value}</td>
               </tr>
             ))}
