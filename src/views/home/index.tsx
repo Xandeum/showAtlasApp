@@ -83,88 +83,91 @@ export const HomeView: FC = ({ }) => {
   return (
     <div className="container flex mx-auto flex-col items-center w-full max-w-4xl p-4 mb-10">
       <h2 className="text-3xl font-medium text-white md:leading-tight my-5">
-        Show Atlas App - TryNet
+        Show Atlas App - DevNet
       </h2>
 
       {/* Right side with search bar */}
-      <div className="flex w-full justify-end mt-4">
-        <TextField
-          fullWidth
-          label="Search by UserID"
-          variant="outlined"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          size="small"
-          sx={{
-            width: '250px',
-            '& .MuiOutlinedInput-root': {
-              borderRadius: '8px',
-              color: '#ffffff',
-              '& fieldset': {
-                borderColor: '#0091ad',
+      <div className='flex flex-col  bg-tiles border-xnd w-full text-white p-3  mt-8 relative md:mb-0 mb-28 text-base'>
+        <div className="absolute -inset-2 -z-10 bg-gradient-to-r from-[#fda31b] via-[#622657] to-[#198476] border-xnd blur  "></div>
+        <div className="flex w-full justify-end mt-4 pr-5">
+          <TextField
+            fullWidth
+            label="Search by UserID"
+            variant="outlined"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            size="small"
+            sx={{
+              width: '250px',
+              '& .MuiOutlinedInput-root': {
+                borderRadius: '8px',
+                color: '#ffffff',
+                '& fieldset': {
+                  borderColor: '#0091ad',
+                },
+                '&:hover fieldset': {
+                  borderColor: '#',
+                },
+                '&.Mui-focused fieldset': {
+                  borderColor: '#4f46e5',
+                },
               },
-              '&:hover fieldset': {
-                borderColor: '#',
+              '& .MuiInputLabel-root': {
+                color: '#cbd5e1',
               },
-              '&.Mui-focused fieldset': {
-                borderColor: '#4f46e5',
+              '& .MuiInputLabel-root.Mui-focused': {
+                color: '#cbd5e1',
               },
-            },
-            '& .MuiInputLabel-root': {
-              color: '#cbd5e1',
-            },
-            '& .MuiInputLabel-root.Mui-focused': {
-              color: '#cbd5e1',
-            },
-          }}
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <SearchIcon sx={{ color: '#cbd5e1' }} />
-              </InputAdornment>
-            ),
-          }}
-        />
-      </div>
+            }}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <SearchIcon sx={{ color: '#cbd5e1' }} />
+                </InputAdornment>
+              ),
+            }}
+          />
+        </div>
 
-      <div className="flex flex-col gap-4 bg-tiles border-xnd w-full text-white p-5 mt-4 relative md:mb-0 mb-28 text-base">
-        <table className="table table-compact w-full">
-          <thead>
-            <tr>
-              <th className="text-center">FSID</th>
-              <th className="text-center normal-case">UserID</th>
-            </tr>
-          </thead>
-          <tbody>
-            {currentItems.map(([id, value], index) => (
-              <tr key={index}>
-                <td className="text-center">{id}</td>
-                <td className="text-center">{value}</td>
+        <div className="flex flex-col gap-4 bg-tiles border-xnd w-full text-white p-5 relative md:mb-0 mb-28 text-base">
+          <table className="table table-compact w-full">
+            <thead>
+              <tr>
+                <th className="text-center">FSID</th>
+                <th className="text-center normal-case">UserID</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {currentItems.map(([id, value], index) => (
+                <tr key={index}>
+                  <td className="text-center">{id}</td>
+                  <td className="text-center">{value}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
 
-        {/* Pagination Controls */}
-        <div className="flex flex-row justify-center items-center space-x-2">
-          <button
-            onClick={() => handlePageChange(currentPage - 1)}
-            disabled={currentPage === 1}
-            className="p-1 bg-white flex items-center justify-center rounded disabled:bg-gray-500"
-          >
-            <NavigateBeforeIcon fontSize='small' sx={{ color: '#050b27' }} />
-          </button>
-          <span className="text-white">
-            Page {currentPage} of {totalPages}
-          </span>
-          <button
-            onClick={() => handlePageChange(currentPage + 1)}
-            disabled={currentPage === totalPages}
-            className="p-1 bg-white flex items-center justify-center rounded disabled:bg-gray-500"
-          >
-            <NavigateNextIcon fontSize='small' sx={{ color: '#050b27' }} />
-          </button>
+          {/* Pagination Controls */}
+          <div className="flex flex-row justify-center items-center space-x-2">
+            <button
+              onClick={() => handlePageChange(currentPage - 1)}
+              disabled={currentPage === 1}
+              className="p-1 bg-white flex items-center justify-center rounded disabled:bg-gray-500"
+            >
+              <NavigateBeforeIcon fontSize='small' sx={{ color: '#050b27' }} />
+            </button>
+            <span className="text-white">
+              Page {currentPage} of {totalPages}
+            </span>
+            <button
+              onClick={() => handlePageChange(currentPage + 1)}
+              disabled={currentPage === totalPages}
+              className="p-1 bg-white flex items-center justify-center rounded disabled:bg-gray-500"
+            >
+              <NavigateNextIcon fontSize='small' sx={{ color: '#050b27' }} />
+            </button>
 
+          </div>
         </div>
       </div>
     </div>
