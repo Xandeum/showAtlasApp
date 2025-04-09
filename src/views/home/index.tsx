@@ -29,6 +29,8 @@ export const HomeView: FC = ({ }) => {
 
         if (result.status === "success") {
           result.data.sort((a, b) => Number(a[0]) - Number(b[0]));
+          //reverse the order of the data
+          result.data.reverse();
           setData(result.data); // Store the data array
           setFilteredData(result.data); // Initialize filtered data with the full data array
         } else {
