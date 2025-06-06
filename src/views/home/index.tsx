@@ -6,6 +6,8 @@ import { InputAdornment, TextField } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search'
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
+import { Connection } from '@solana/web3.js';
+import { listDirectoryEntry } from 'test2-xandeum-web3';
 
 export const HomeView: FC = ({ }) => {
   const [data, setData] = useState([]);
@@ -16,23 +18,27 @@ export const HomeView: FC = ({ }) => {
   const [currentPage, setCurrentPage] = useState(1); // State for current page
   const itemsPerPage = 10; // Number of items to display per page
 
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("/api/atlasdata"); // Call the API route
+        const connection = new Connection("https://apis.trynet.xandeum.com", 'confirmed');
+        const res = await listDirectoryEntry(connection, "/root");
 
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
 
-        const result = await response.json();
+        const fsids = res?.result?.response?.response?.ListDir?.entries;
 
-        if (result.status === "success") {
-          result.data.sort((a, b) => Number(a[0]) - Number(b[0]));
+        const result = fsids.map(item => ({
+          id: item.path.replace('/', ''), // Extract id from path by removing the leading '/'
+          value: item.name
+        }));
+
+        if (fsids?.length > 0) {
+          result.sort((a, b) => Number(a[0]) - Number(b[0]));
           //reverse the order of the data
-          result.data.reverse();
-          setData(result.data); // Store the data array
-          setFilteredData(result.data); // Initialize filtered data with the full data array
+          result.reverse();
+          setData(result); // Store the data array
+          setFilteredData(result); // Initialize filtered data with the full data array
         } else {
           setError("Failed to fetch data: Invalid response format.");
         }
@@ -51,7 +57,7 @@ export const HomeView: FC = ({ }) => {
       setFilteredData(data);
     } else {
       const filtered = data.filter(item => {
-        const userId = item[1].toString();
+        const userId = item?.id;
         return userId.toLowerCase().includes(searchTerm.toLowerCase());
       });
       setFilteredData(filtered);
@@ -140,7 +146,7 @@ export const HomeView: FC = ({ }) => {
               </tr>
             </thead>
             <tbody>
-              {currentItems.map(([id, value], index) => (
+              {currentItems.map(({ id, value }, index) => (
                 <tr key={index}>
                   <td className="text-center">{id}</td>
                   <td className="text-center">{value}</td>
