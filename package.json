@@ -35,6 +35,7 @@
     "next-transpile-modules": "^10.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "test2-xandeum-web3": "^10.3.0",
     "zustand": "^3.6.9"
   },
   "devDependencies": {
