@@ -7,7 +7,7 @@ import SearchIcon from '@mui/icons-material/Search'
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import { Connection } from '@solana/web3.js';
-import { listDirectoryEntry } from 'test2-xandeum-web3';
+import { getMetadata, listDirectoryEntry } from 'test2-xandeum-web3';
 
 export const HomeView: FC = ({ }) => {
   const [data, setData] = useState([]);
@@ -27,10 +27,14 @@ export const HomeView: FC = ({ }) => {
 
 
         const fsids = res?.result?.response?.response?.ListDir?.entries;
+        console.log("Fetched fsids:", fsids);
 
-        const result = fsids.map(item => ({
-          id: item.path.replace('/', ''), // Extract id from path by removing the leading '/'
-          value: item.name
+        const result = await Promise.all(fsids.map(async (item) => {
+          const metadata = await getMetadata(connection, item.path);
+          return {
+            id: item.name,
+            value: metadata?.result?.response?.response?.Metadata?.owner || 'Unknown Owner',
+          };
         }));
 
         if (fsids?.length > 0) {
