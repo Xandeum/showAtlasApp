@@ -61,7 +61,7 @@ export const HomeView: FC = ({ }) => {
       setFilteredData(data);
     } else {
       const filtered = data.filter(item => {
-        const userId = item?.id;
+        const userId = item?.value;
         return userId.toLowerCase().includes(searchTerm.toLowerCase());
       });
       setFilteredData(filtered);
